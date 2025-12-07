@@ -680,21 +680,21 @@ const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onS
     {
       name: "POPULAR",
       followers: "1.000",
-      price: "47",
+      price: "47,90",
       features: ["Entrega imediata", "Ideal para liberar link na bio", "Aumenta autoridade instantânea"],
       bonuses: ["500 curtidas", "5.000 visualizações"]
     },
     {
       name: "PROFISSIONAL",
       followers: "2.000",
-      price: "97",
+      price: "97,90",
       features: ["Entrega em minutos", "Ajuda a liberar TikTok Shop", "Crescimento rápido"],
       bonuses: ["1.000 curtidas", "10.000 visualizações"]
     },
     {
       name: "AVANÇADO",
       followers: "5.000",
-      price: "287",
+      price: "287,90",
       features: ["Forte autoridade", "Perfeito para viralizar", "Suporte prioritário"],
       bonuses: ["2.500 curtidas", "30.000 visualizações"],
       highlight: true // Agora o de 5k é o destaque dourado
@@ -702,7 +702,7 @@ const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onS
     {
       name: "MÁXIMO",
       followers: "10.000",
-      price: "487",
+      price: "487,90",
       features: ["Libera monetização", "Autoridade de influenciador", "Gerente de conta"],
       bonuses: ["5.000 curtidas", "60.000 visualizações"]
     }
@@ -895,7 +895,7 @@ const App: React.FC = () => {
   };
 
   const handlePackageSelection = (pkg: Package) => {
-    if (pkg.price === "47") {
+    if (pkg.price === "47,90") {
       // Se for o pacote de 47 reais, mostra o upsell
       setShowUpsell(true);
       playSound('POP', 0.5);
