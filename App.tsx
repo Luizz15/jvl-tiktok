@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Heart, MessageCircle, Share2, CheckCircle2, Play, Users, DollarSign, ShieldCheck, Star, ChevronLeft, ChevronRight, Zap, TrendingUp, Sparkles } from 'lucide-react';
+import { Heart, MessageCircle, Share2, CheckCircle2, Play, Users, DollarSign, ShieldCheck, Star, ChevronLeft, ChevronRight, Zap, TrendingUp, Sparkles, X, Eye, ThumbsUp, Truck, ShoppingBag, Lock } from 'lucide-react';
 import { Button } from './components/Button';
 import { QuizStep } from './components/QuizStep';
 import { Step, UserState, Package } from './types';
@@ -95,6 +95,119 @@ const Popup: React.FC<{ title: string; message: string; onClose: () => void; aut
         <p className="text-gray-300 mb-6">{message}</p>
         {/* Renderiza o botão apenas se NÃO for autoClose */}
         {!autoClose && <Button onClick={onClose} fullWidth>CONTINUAR</Button>}
+      </div>
+    </div>
+  );
+};
+
+// --- Upsell Popup Component (Premium) ---
+
+const UpsellPopup: React.FC<{ onAccept: () => void; onDecline: () => void }> = ({ onAccept, onDecline }) => {
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-sm rounded-[32px] overflow-hidden bg-[#0a0a0a] border-2 border-purple-500/30 shadow-[0_0_40px_-10px_rgba(168,85,247,0.3)] animate-bounce-in flex flex-col">
+        
+        {/* Glow Effects */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-purple-600/10 blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 right-0 w-full h-32 bg-green-500/10 blur-3xl pointer-events-none"></div>
+
+        <div className="relative z-10 p-6 flex flex-col items-center text-center">
+          
+          {/* Título Principal */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-black text-white mb-1 uppercase tracking-tight">Oferta Especial!</h2>
+            <p className="text-purple-300 font-medium text-sm">Apenas para você, agora!</p>
+          </div>
+
+          {/* Preço com Destaque */}
+          <div className="mb-6 flex flex-col items-center">
+             <span className="text-gray-500 text-lg font-bold line-through decoration-2 decoration-gray-600">
+                R$170,00
+             </span>
+             <div className="relative">
+                <span className="text-5xl font-black text-[#00FFA7] drop-shadow-[0_0_15px_rgba(0,255,167,0.6)] tracking-tighter">
+                   R$67,90
+                </span>
+                <div className="absolute -top-4 -right-12 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full transform rotate-12 shadow-lg">
+                   60% OFF
+                </div>
+             </div>
+          </div>
+
+          {/* Bloco do Pacote Especial */}
+          <div className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 mb-6">
+             <h3 className="text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                Pacote Premium – 1.700 seguidores
+             </h3>
+             <ul className="space-y-3 text-left">
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 text-green-400">
+                      <CheckCircle2 size={14} />
+                   </div>
+                   1.700 seguidores para metas
+                </li>
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400">
+                      <Eye size={14} />
+                   </div>
+                   + 15.000 visualizações incluídas
+                </li>
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 text-blue-400">
+                      <ThumbsUp size={14} />
+                   </div>
+                   + 5.000 curtidas incluídas
+                </li>
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center flex-shrink-0 text-yellow-400">
+                      <Truck size={14} />
+                   </div>
+                   Entrega imediata
+                </li>
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-gray-500/20 flex items-center justify-center flex-shrink-0 text-gray-300">
+                      <ShieldCheck size={14} />
+                   </div>
+                   Garantia de 60 dias
+                </li>
+                <li className="flex items-center gap-3 text-sm text-gray-200">
+                   <div className="w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center flex-shrink-0 text-pink-400">
+                      <ShoppingBag size={14} />
+                   </div>
+                   Libere o TikTok Shop agora
+                </li>
+             </ul>
+          </div>
+
+          {/* Aviso de Urgência */}
+          <p className="text-yellow-400 text-xs text-center mb-5 font-medium bg-yellow-400/10 px-3 py-1.5 rounded-lg border border-yellow-400/20">
+             ⚠ Oferta disponível somente nesta tela. Se você sair, não aparece de novo.
+          </p>
+
+          {/* Botões */}
+          <div className="w-full space-y-3">
+             <button 
+                onClick={onAccept}
+                className="w-full py-4 bg-[#00FFA7] hover:bg-[#00e696] text-black font-black text-sm uppercase rounded-xl shadow-[0_0_25px_rgba(0,255,167,0.4)] transition-transform active:scale-95 flex items-center justify-center gap-2 group"
+             >
+                <Sparkles size={18} className="animate-pulse" />
+                Sim! Quero desbloquear esse super desconto!
+             </button>
+
+             <button 
+                onClick={onDecline}
+                className="w-full py-3 bg-[#1a1a1a] hover:bg-[#252525] border border-white/10 text-gray-400 font-medium text-xs rounded-xl transition-colors"
+             >
+                Não, prefiro continuar com o pacote menor
+             </button>
+          </div>
+
+          {/* Rodapé */}
+          <div className="mt-4 pt-4 border-t border-white/5 w-full">
+             <p className="text-[10px] text-gray-600">547 pessoas aproveitaram esta oferta hoje.</p>
+          </div>
+
+        </div>
       </div>
     </div>
   );
@@ -556,7 +669,8 @@ const SocialNotifications: React.FC = () => {
   );
 };
 
-const OffersStep: React.FC = () => {
+// Recebe a função onSelectPackage para comunicar ao pai qual pacote foi clicado
+const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onSelectPackage }) => {
   useEffect(() => {
     // Tocar som de woosh ao entrar na tela de ofertas
     playSound('WHOOSH', 0.3);
@@ -594,9 +708,10 @@ const OffersStep: React.FC = () => {
     }
   ];
 
-  const handlePurchase = () => {
-    // Som positivo de compra (além do clique padrão do botão)
-    playSound('PURCHASE', 0.6);
+  const handlePurchase = (pkg: Package) => {
+    // Som positivo de clique
+    playSound('CLICK', 0.4);
+    onSelectPackage(pkg);
   };
 
   return (
@@ -705,7 +820,7 @@ const OffersStep: React.FC = () => {
             {/* Call to Action Button */}
             <Button 
               fullWidth 
-              onClick={handlePurchase}
+              onClick={() => handlePurchase(pkg)}
               className="bg-gradient-to-r from-tiktok-cyan to-tiktok-pink border-none text-white shadow-[0_0_20px_rgba(0,242,234,0.3)] hover:shadow-[0_0_30px_rgba(255,0,80,0.5)] relative overflow-hidden group/btn"
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm font-black uppercase tracking-wide">
@@ -752,6 +867,7 @@ const App: React.FC = () => {
   const [step, setStep] = useState<Step>('HOME');
   const [user, setUser] = useState<UserState>({ name: '', discount: 0, selectedFollowers: 0 });
   const [showPopup, setShowPopup] = useState<{ title: string; message: string; nextStep?: Step; autoClose?: boolean } | null>(null);
+  const [showUpsell, setShowUpsell] = useState(false);
 
   // Scroll to top on step change
   useEffect(() => {
@@ -778,6 +894,31 @@ const App: React.FC = () => {
     });
   };
 
+  const handlePackageSelection = (pkg: Package) => {
+    if (pkg.price === "47") {
+      // Se for o pacote de 47 reais, mostra o upsell
+      setShowUpsell(true);
+      playSound('POP', 0.5);
+    } else {
+      // Lógica normal de checkout (aqui apenas simula som de compra)
+      playSound('PURCHASE', 0.6);
+      // alert(`Redirecionando para checkout do pacote: ${pkg.name}`);
+    }
+  };
+
+  const handleUpsellAccept = () => {
+    playSound('PURCHASE', 0.7);
+    setShowUpsell(false);
+    // Lógica para levar ao checkout do pacote de 67,90
+    // alert("Redirecionando para checkout: PACOTE UPSELL (R$67,90)");
+  };
+
+  const handleUpsellDecline = () => {
+    setShowUpsell(false);
+    // Lógica para levar ao checkout do pacote original de 47,00
+    // alert("Redirecionando para checkout: PACOTE ORIGINAL (R$47,00)");
+  };
+
   return (
     <Layout>
       {showPopup && (
@@ -786,6 +927,13 @@ const App: React.FC = () => {
           message={showPopup.message} 
           onClose={closePopup}
           autoClose={showPopup.autoClose}
+        />
+      )}
+
+      {showUpsell && (
+        <UpsellPopup 
+          onAccept={handleUpsellAccept}
+          onDecline={handleUpsellDecline}
         />
       )}
 
@@ -838,7 +986,7 @@ const App: React.FC = () => {
       
       {step === 'ROULETTE' && <RouletteStep onNext={() => handleNext('OFFERS')} />}
       
-      {step === 'OFFERS' && <OffersStep />}
+      {step === 'OFFERS' && <OffersStep onSelectPackage={handlePackageSelection} />}
     </Layout>
   );
 };
