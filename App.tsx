@@ -187,7 +187,10 @@ const UpsellPopup: React.FC<{ onAccept: () => void; onDecline: () => void }> = (
           {/* Botões */}
           <div className="w-full space-y-3">
              <button 
-                onClick={onAccept}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAccept();
+                }}
                 className="w-full py-4 bg-[#00FFA7] hover:bg-[#00e696] text-black font-black text-sm uppercase rounded-xl shadow-[0_0_25px_rgba(0,255,167,0.4)] transition-transform active:scale-95 flex items-center justify-center gap-2 group"
              >
                 <Sparkles size={18} className="animate-pulse" />
@@ -195,7 +198,10 @@ const UpsellPopup: React.FC<{ onAccept: () => void; onDecline: () => void }> = (
              </button>
 
              <button 
-                onClick={onDecline}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDecline();
+                }}
                 className="w-full py-3 bg-[#1a1a1a] hover:bg-[#252525] border border-white/10 text-gray-400 font-medium text-xs rounded-xl transition-colors"
              >
                 Não, prefiro continuar com o pacote menor
@@ -342,7 +348,8 @@ const SocialProofStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNextClick = () => {
+  const handleNextClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     playSound('CLICK', 0.4);
     onNext();
   };
@@ -390,7 +397,10 @@ const SimulateSelectStep: React.FC<{ user: UserState; setUser: (u: UserState) =>
       {[1000, 2000, 5000, 10000].map((num) => (
         <button
           key={num}
-          onClick={() => setUser({...user, selectedFollowers: num})}
+          onClick={(e) => {
+            e.stopPropagation();
+            setUser({...user, selectedFollowers: num});
+          }}
           className={`p-6 rounded-xl border font-bold text-xl transition-all duration-300
             ${user.selectedFollowers === num 
               ? 'bg-tiktok-cyan/20 border-tiktok-cyan text-white shadow-[0_0_20px_rgba(0,242,234,0.3)] scale-105' 

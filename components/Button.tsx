@@ -24,6 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // Fix: Prevent external scripts (pixels) from accessing React internals and crashing
     playSound('CLICK', 0.4);
     if (onClick) onClick(e);
   };

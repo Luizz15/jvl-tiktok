@@ -94,7 +94,10 @@ export const QuizStep: React.FC<QuizStepProps> = ({ question, options, onSelect,
         {options.map((option, idx) => (
           <button
             key={idx}
-            onClick={() => handleSelect(option)}
+            onClick={(e) => {
+              e.stopPropagation(); // Fix: Stop propagation to prevent pixel script errors
+              handleSelect(option);
+            }}
             className={`w-full p-5 rounded-xl text-left transition-all duration-300 border flex items-center justify-between group
               ${selected === option 
                 ? 'bg-tiktok-cyan/20 border-tiktok-cyan shadow-[0_0_15px_rgba(0,242,234,0.3)]' 
