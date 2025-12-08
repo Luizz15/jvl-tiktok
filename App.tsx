@@ -845,7 +845,7 @@ const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onS
 
       {/* Floating WhatsApp Button */}
       <a 
-        href="https://wa.me/5588996349597" 
+        href="https://wa.me/message/LPF7B5WA4KH7A1" 
         target="_blank" 
         rel="noopener noreferrer"
         className="fixed bottom-4 right-4 z-[100] w-16 h-16 bg-[#25D366] rounded-[14px] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-transform hover:scale-105 active:scale-95 group"
