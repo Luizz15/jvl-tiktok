@@ -350,6 +350,7 @@ const SocialProofStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
 
   const handleNextClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     playSound('CLICK', 0.4);
     onNext();
   };
@@ -399,6 +400,7 @@ const SimulateSelectStep: React.FC<{ user: UserState; setUser: (u: UserState) =>
           key={num}
           onClick={(e) => {
             e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
             setUser({...user, selectedFollowers: num});
           }}
           className={`p-6 rounded-xl border font-bold text-xl transition-all duration-300
@@ -686,20 +688,23 @@ const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onS
     playSound('WHOOSH', 0.3);
   }, []);
 
+  // LINKS MAPEADOS AQUI
   const packages: Package[] = [
     {
       name: "POPULAR",
       followers: "1.000",
       price: "47,90",
       features: ["Entrega imediata", "Ideal para liberar link na bio", "Aumenta autoridade instantânea"],
-      bonuses: ["500 curtidas", "5.000 visualizações"]
+      bonuses: ["500 curtidas", "5.000 visualizações"],
+      url: "https://pay.cakto.com.br/gq6egmt"
     },
     {
       name: "PROFISSIONAL",
       followers: "2.000",
       price: "97,90",
       features: ["Entrega em minutos", "Ajuda a liberar TikTok Shop", "Crescimento rápido"],
-      bonuses: ["1.000 curtidas", "10.000 visualizações"]
+      bonuses: ["1.000 curtidas", "10.000 visualizações"],
+      url: "https://pay.cakto.com.br/36qw4b2"
     },
     {
       name: "AVANÇADO",
@@ -707,14 +712,16 @@ const OffersStep: React.FC<{ onSelectPackage: (pkg: Package) => void }> = ({ onS
       price: "287,90",
       features: ["Forte autoridade", "Perfeito para viralizar", "Suporte prioritário"],
       bonuses: ["2.500 curtidas", "30.000 visualizações"],
-      highlight: true // Agora o de 5k é o destaque dourado
+      highlight: true,
+      url: "https://pay.cakto.com.br/wza5m76"
     },
     {
       name: "MÁXIMO",
       followers: "10.000",
       price: "487,90",
       features: ["Libera monetização", "Autoridade de influenciador", "Gerente de conta"],
-      bonuses: ["5.000 curtidas", "60.000 visualizações"]
+      bonuses: ["5.000 curtidas", "60.000 visualizações"],
+      url: "https://pay.cakto.com.br/3dnfqxx"
     }
   ];
 
@@ -910,23 +917,23 @@ const App: React.FC = () => {
       setShowUpsell(true);
       playSound('POP', 0.5);
     } else {
-      // Lógica normal de checkout (aqui apenas simula som de compra)
+      // Checkout direto
       playSound('PURCHASE', 0.6);
-      // alert(`Redirecionando para checkout do pacote: ${pkg.name}`);
+      window.location.href = pkg.url;
     }
   };
 
   const handleUpsellAccept = () => {
     playSound('PURCHASE', 0.7);
     setShowUpsell(false);
-    // Lógica para levar ao checkout do pacote de 67,90
-    // alert("Redirecionando para checkout: PACOTE UPSELL (R$67,90)");
+    // Link do checkout com Upsell (R$67,90)
+    window.location.href = "https://pay.cakto.com.br/zzvyb3a";
   };
 
   const handleUpsellDecline = () => {
     setShowUpsell(false);
-    // Lógica para levar ao checkout do pacote original de 47,00
-    // alert("Redirecionando para checkout: PACOTE ORIGINAL (R$47,00)");
+    // Link do pacote original de R$47,90
+    window.location.href = "https://pay.cakto.com.br/gq6egmt";
   };
 
   return (

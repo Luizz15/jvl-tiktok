@@ -31,4 +31,5 @@ export interface Package {
   features: string[];
   bonuses: string[];
   highlight?: boolean;
+  url: string; // Link de checkout direto
 }

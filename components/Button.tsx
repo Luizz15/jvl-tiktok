@@ -24,7 +24,11 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Fix: Prevent external scripts (pixels) from accessing React internals and crashing
+    // CRITICAL FIX: Stop propagation immediately to prevent external pixel scripts
+    // from trying to serialize the React synthetic event (which causes circular structure errors).
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    
     playSound('CLICK', 0.4);
     if (onClick) onClick(e);
   };
